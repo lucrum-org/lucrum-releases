@@ -1,0 +1,41 @@
+name: Reset repo identity
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download existing release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p assets
+          gh release download v0.1.0 -D assets || true
+          ls -la assets
+
+      - name: Rewrite history as github-actions[bot]
+        run: |
+          git checkout --orphan fresh-main
+          git add README.md
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m "Public release binaries for Lumen."
+          git branch -M main
+          git push -f origin main
+
+      - name: Recreate release as github-actions[bot]
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete v0.1.0 --yes || true
+          gh release create v0.1.0 \
+            --title "v0.1.0" \
+            --notes "Public binaries for Homebrew and curl installs." \
+            assets/*
