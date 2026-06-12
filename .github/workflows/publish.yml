@@ -1,0 +1,31 @@
+name: Republish release as bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to re-publish as github-actions[bot]"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  republish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download assets and recreate release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          mkdir -p assets
+          gh release download "$TAG" --repo "$REPO" -D assets
+          ls -la assets
+          gh release delete "$TAG" --repo "$REPO" --yes --cleanup-tag
+          sleep 3
+          gh release create "$TAG" --repo "$REPO" \
+            --title "$TAG" \
+            --notes "Public binaries for Homebrew and curl installs." \
+            assets/*
