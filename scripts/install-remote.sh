@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Downloads the latest Lumen release from GitHub and installs it locally.
-# Override the repo with: LUMEN_INSTALL_REPO=your-org/lumen-terminal
+# Downloads the latest Lucrum release from GitHub and installs it locally.
+# Override the repo with: LUCRUM_INSTALL_REPO=your-org/lucrum-terminal
 
-REPO="${LUMEN_INSTALL_REPO:-lumen-terminal/lumen-releases}"
+REPO="${LUCRUM_INSTALL_REPO:-lucrum-org/lucrum-releases}"
 INSTALL_DIR="${INSTALL_DIR:-$HOME/.local/bin}"
-APP_NAME="${APP_NAME:-Lumen}"
+APP_NAME="${APP_NAME:-Lucrum}"
 BUILD_APP="${BUILD_APP:-1}"
 
 download_release_asset() {
@@ -53,10 +53,10 @@ OS="$(uname -s)"
 ARCH="$(uname -m)"
 
 case "$OS-$ARCH" in
-  Darwin-arm64) ASSET="lumen-aarch64-apple-darwin.tar.gz" ;;
-  Darwin-x86_64) ASSET="lumen-x86_64-apple-darwin.tar.gz" ;;
-  Linux-x86_64) ASSET="lumen-x86_64-unknown-linux-gnu.tar.gz" ;;
-  Linux-aarch64) ASSET="lumen-aarch64-unknown-linux-gnu.tar.gz" ;;
+  Darwin-arm64) ASSET="lucrum-aarch64-apple-darwin.tar.gz" ;;
+  Darwin-x86_64) ASSET="lucrum-x86_64-apple-darwin.tar.gz" ;;
+  Linux-x86_64) ASSET="lucrum-x86_64-unknown-linux-gnu.tar.gz" ;;
+  Linux-aarch64) ASSET="lucrum-aarch64-unknown-linux-gnu.tar.gz" ;;
   *)
     echo "error: unsupported platform: $OS $ARCH" >&2
     exit 1
@@ -67,16 +67,16 @@ TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
 echo "Downloading ${ASSET} from ${REPO} ..."
-download_release_asset "$ASSET" "$TMP_DIR/lumen.tar.gz"
-tar -xzf "$TMP_DIR/lumen.tar.gz" -C "$TMP_DIR"
+download_release_asset "$ASSET" "$TMP_DIR/lucrum.tar.gz"
+tar -xzf "$TMP_DIR/lucrum.tar.gz" -C "$TMP_DIR"
 
 mkdir -p "$INSTALL_DIR"
-BINARY="$TMP_DIR/lumen"
+BINARY="$TMP_DIR/lucrum"
 if [[ ! -f "$BINARY" ]]; then
-  BINARY="$TMP_DIR/dist-lumen"
+  BINARY="$TMP_DIR/dist-lucrum"
 fi
-install -m 755 "$BINARY" "$INSTALL_DIR/lumen"
-echo "Installed: $INSTALL_DIR/lumen"
+install -m 755 "$BINARY" "$INSTALL_DIR/lucrum"
+echo "Installed: $INSTALL_DIR/lucrum"
 
 case ":$PATH:" in
   *":$INSTALL_DIR:"*) ;;
@@ -90,19 +90,19 @@ esac
 if [[ "$BUILD_APP" == "1" && "$OS" == "Darwin" ]]; then
   APP_ZIP_ASSET=""
   case "$ARCH" in
-    arm64) APP_ZIP_ASSET="Lumen-macOS-aarch64.zip" ;;
-    x86_64) APP_ZIP_ASSET="Lumen-macOS-x86_64.zip" ;;
+    arm64) APP_ZIP_ASSET="Lucrum-macOS-aarch64.zip" ;;
+    x86_64) APP_ZIP_ASSET="Lucrum-macOS-x86_64.zip" ;;
   esac
 
   if [[ -n "$APP_ZIP_ASSET" ]]; then
     echo "Downloading ${APP_ZIP_ASSET} from ${REPO} ..."
-    download_release_asset "$APP_ZIP_ASSET" "$TMP_DIR/Lumen.zip"
+    download_release_asset "$APP_ZIP_ASSET" "$TMP_DIR/Lucrum.zip"
     rm -rf "$HOME/Applications/${APP_NAME}.app"
-    unzip -q "$TMP_DIR/Lumen.zip" -d "$HOME/Applications"
+    unzip -q "$TMP_DIR/Lucrum.zip" -d "$HOME/Applications"
     echo "Installed app: $HOME/Applications/${APP_NAME}.app"
   fi
 fi
 
 echo
 echo "Run from any terminal:"
-echo "  lumen"
+echo "  lucrum"
