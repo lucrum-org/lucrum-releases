@@ -36,7 +36,7 @@ Release binaries live on the **[Releases](https://github.com/lucrum-org/lucrum-r
 ### Homebrew (recommended)
 
 ```sh
-brew tap lucrum-org/lucrum
+brew tap lucrum-org/lucrum https://github.com/lucrum-org/lucrum-releases
 brew install --formula lucrum-terminal   # CLI: lucrum
 brew install --cask lucrum-terminal      # macOS app
 ```
@@ -70,4 +70,4 @@ fi
 ## Links
 
 - Website: [joinlucrum.com](https://joinlucrum.com)
-- Homebrew tap: [lucrum-org/homebrew-lucrum](https://github.com/lucrum-org/homebrew-lucrum)
+- Homebrew tap: this repository (Formula/ and Casks/)
