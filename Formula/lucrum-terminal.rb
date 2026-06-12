@@ -1,28 +1,28 @@
 class LucrumTerminal < Formula
   desc "Terminal that earns while you wait"
   homepage "https://github.com/lucrum-org/lucrum-terminal"
-  version "0.1.2"
+  version "0.1.3"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/lucrum-org/lucrum-releases/releases/download/v#{version}/lucrum-aarch64-apple-darwin.tar.gz"
-      sha256 "58a480bec551d475ad759271fb7a90888bda77085ae56cac5e987aa58ec626b6"
+      sha256 "64fb28525296f2223b767db22ef9c697a6db6a7ba59a9a12aae24d1158014775"
     end
     on_intel do
       url "https://github.com/lucrum-org/lucrum-releases/releases/download/v#{version}/lucrum-x86_64-apple-darwin.tar.gz"
-      sha256 "084a0b69170c12827d81c43bbd4ea6e7fa218c3e34d1075323f136b50a51094d"
+      sha256 "cb97f1b839e88c04742d8489d1c0219a1a9c678c88c3acaa2d011f6f2403762b"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/lucrum-org/lucrum-releases/releases/download/v#{version}/lucrum-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "73b3030f08efd249977822086b9c2d971b04df9c2ba64993b1d4271133b87440"
+      sha256 "a408d7132b6a2e3366ab84967102aac643810c60bf8fae5a0d3fb1d37a26f902"
     end
     on_intel do
       url "https://github.com/lucrum-org/lucrum-releases/releases/download/v#{version}/lucrum-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "82448abafc980013831031d8c4efa37bbdefa17c3be6fcef5f5e174b5fb6782e"
+      sha256 "c722687380129ceb131c656d62798f511586d1f991a1e990b93a22ec11c22a0d"
     end
   end
 
