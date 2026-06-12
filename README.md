@@ -44,7 +44,7 @@ brew install --cask lumen-terminal      # macOS app
 ### curl
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/lumen-terminal/lumen-terminal/lumen-terminal/scripts/install-remote.sh | bash
+curl -fsSL https://raw.githubusercontent.com/lumen-terminal/lumen-releases/main/scripts/install-remote.sh | bash
 ```
 
 ### Manual
