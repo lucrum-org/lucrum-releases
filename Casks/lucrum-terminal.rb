@@ -1,12 +1,12 @@
 cask "lucrum-terminal" do
-  version "0.2.0"
+  version "0.3.0"
 
   on_arm do
-    sha256 "c69b7e213ff56db95b8040b6c1a89954152117dce6fbf59735bf19856586b233"
+    sha256 "3d626eb4acf2c27300491deb50549be6b38af4f6829c2c8e943e320f86813263"
     url "https://github.com/lucrum-org/lucrum-releases/releases/download/v#{version}/Lucrum-macOS-aarch64.zip"
   end
   on_intel do
-    sha256 "669a8adc400b2be0556d6cd541731a4af36383684e2d5f34a424c08b59957d03"
+    sha256 "d2e0e096100bbaeeb4f54e8333bc21cb6651101a775e817ce9f50a7f8d237945"
     url "https://github.com/lucrum-org/lucrum-releases/releases/download/v#{version}/Lucrum-macOS-x86_64.zip"
   end
 
